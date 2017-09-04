@@ -2,7 +2,6 @@
  * supports find/insert/erase as well as split/merge
  */
 
-#include <cstdio>
 #include <cstdlib>
 #include <utility>
 using namespace std;
@@ -20,8 +19,9 @@ struct Treap
 	};
 	
 	Node *bottom = new Node();
-	Node *deleted = bottom, *last = bottom, *root = bottom;
+	Node *root = bottom;
 	
+	Treap() { srand(42); }
 	~Treap() { destroy(root); delete bottom; }
 	
 	void destroy(Node *r)

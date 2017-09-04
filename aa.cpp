@@ -1,5 +1,5 @@
 /* AA tree implementation
- * basically a binary 2-3 B-tree
+ * basically a binary 2-3 tree
  * http://user.it.uu.se/~arnea/ps/simp.pdf
  */
 
