@@ -1,0 +1,29 @@
+#!/bin/bash
+# Place this file in your home directory, your template
+# in ~/.cp_template.cppand add ". .cp_functions" (without quotes)
+# at the end of your .bashrc
+
+# Initialize the solution for the given problem from the template
+function cpinit()
+{
+  if [[ -z "$1" ]]; then
+    echo Usage: cpinit '<problem name'
+  else
+    if [[ -f "$1.cpp" ]]; then
+      echo File $1.cpp already exists
+    else
+      cp ~/.cp_template.cpp $1.cpp
+    fi
+  fi
+}
+
+# Compile&run the given problem, and color the output to
+# distinguish it from copy pasted input
+function cprun()
+{
+  if [[ -f "$1.cpp" ]]; then
+    g++ $1.cpp -o $1 -O3 && ./$1 | grep --color .;
+  else
+    echo Usage: cprun '<problem name>'
+  fi
+}
