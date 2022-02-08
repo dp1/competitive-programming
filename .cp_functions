@@ -1,18 +1,20 @@
 #!/bin/bash
-# Place this file in your home directory, your template
-# in ~/.cp_template.cppand add ". .cp_functions" (without quotes)
-# at the end of your .bashrc
+# Place this file in your home directory, your template in
+# ~/.cp_template.cpp, your library in ~/.cp_library.cpp and
+# add ". .cp_functions" (without quotes) at the end of your .bashrc
 
 # Initialize the solution for the given problem from the template
 function cpinit()
 {
   if [[ -z "$1" ]]; then
-    echo Usage: cpinit '<problem name'
+    echo Usage: cpinit '<problem name>'
   else
     if [[ -f "$1.cpp" ]]; then
       echo File $1.cpp already exists
     else
       cp ~/.cp_template.cpp $1.cpp
+
+      code $1.cpp
     fi
   fi
 }
@@ -21,9 +23,27 @@ function cpinit()
 # distinguish it from copy pasted input
 function cprun()
 {
+  CXXFLAGS="-O3 -std=c++17 -Wshadow -Wall -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover"
   if [[ -f "$1.cpp" ]]; then
-    g++ $1.cpp -o $1 -O3 && ./$1 | grep --color .;
+    g++ $CXXFLAGS $1.cpp -o $1 && ./$1 2>&1 | grep --color .;
+    # g++ $CXXFLAGS $1.cpp -o $1 && ./$1
   else
     echo Usage: cprun '<problem name>'
   fi
+}
+
+# Initialize a folder for a given contest. If no contest name if provided,
+# use the current directory.
+function cpcontest()
+{
+  if [[ $1 ]]; then
+    if [[ -f "$1" ]] || [[ -d "$1" ]]; then
+      echo $1 already exists
+      return
+    fi
+    mkdir $1
+    cd $1
+  fi
+  code .
+  code ~/.cp_library.cpp
 }
