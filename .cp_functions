@@ -21,9 +21,23 @@ function cpinit()
 
 # Compile&run the given problem, and color the output to
 # distinguish it from copy pasted input
+#
+# Using precompiled headers:
+# - find bits/stdc++.h by compiling something with -H
+# - compile it: g++ $CXXFLAGS <file> -o stdc++.h.gch
+#   CXXFLAGS MUST be the same options that you set below, or it will be ignored later
+# - set BITSSTDCPP_GCH to the output filename WITHOUT GCH AT THE END and enjoy faster compilation
+# If you don't want precompiled headers, set BITSSTDCPP_GCH to ""
+
 function cprun()
 {
   CXXFLAGS="-O3 -std=c++17 -Wshadow -Wall -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover"
+  BITSSTDCPP_GCH="$HOME/Desktop/cp/stdc++.h"
+
+  if [[ $BITSSTDCPP_GCH ]]; then
+    CXXFLAGS="$CXXFLAGS -include $BITSSTDCPP_GCH"
+  fi
+
   if [[ -f "$1.cpp" ]]; then
     g++ $CXXFLAGS $1.cpp -o $1 && ./$1 2>&1 | grep --color .;
     # g++ $CXXFLAGS $1.cpp -o $1 && ./$1
