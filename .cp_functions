@@ -31,7 +31,7 @@ function cpinit()
 
 function cprun()
 {
-  CXXFLAGS="-O3 -std=c++17 -Wshadow -Wall -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover"
+  CXXFLAGS="-O3 -std=c++17 -Wshadow -Wall -Wno-sign-compare -Wconversion -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover"
   BITSSTDCPP_GCH="$HOME/Desktop/cp/stdc++.h"
 
   if [[ $BITSSTDCPP_GCH ]]; then
