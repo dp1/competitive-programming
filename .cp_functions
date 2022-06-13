@@ -38,9 +38,15 @@ function cprun()
     CXXFLAGS="$CXXFLAGS -include $BITSSTDCPP_GCH"
   fi
 
-  if [[ -f "$1.cpp" ]]; then
-    g++ $CXXFLAGS $1.cpp -o $1 && ./$1 2>&1 | grep --color .;
-    # g++ $CXXFLAGS $1.cpp -o $1 && ./$1
+  filename=$1
+  # remove final .cpp if present
+  if [[ $filename == *.cpp ]]; then
+    filename=${filename::-4}
+  fi
+
+  if [[ -f "$filename.cpp" ]]; then
+    g++ $CXXFLAGS $filename.cpp -o $filename && ./$filename 2>&1 | grep --color .;
+    # g++ $CXXFLAGS $filename.cpp -o $filename && ./$filename
   else
     echo Usage: cprun '<problem name>'
   fi
