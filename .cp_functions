@@ -45,7 +45,7 @@ function cprun()
   fi
 
   if [[ -f "$filename.cpp" ]]; then
-    g++ $CXXFLAGS $filename.cpp -o $filename && ./$filename 2>&1 | grep --color .;
+    g++ $CXXFLAGS $filename.cpp -o $filename && ./$filename 2>&1 | grep --color '.*';
     # g++ $CXXFLAGS $filename.cpp -o $filename && ./$filename
   else
     echo Usage: cprun '<problem name>'
