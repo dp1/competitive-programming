@@ -44,6 +44,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+    cout << fixed << setprecision(12);
 
     int T = 1;
     cin >> T;
