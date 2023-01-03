@@ -13,6 +13,7 @@ function cpinit()
       echo File $1.cpp already exists
     else
       cp ~/.cp_template.cpp $1.cpp
+      export _LAST_CPINIT_FILE=$1
 
       code $1.cpp
     fi
@@ -39,6 +40,14 @@ function cprun()
   fi
 
   filename=$1
+
+  if [[ -z "$filename" ]]; then
+    if [[ "$_LAST_CPINIT_FILE" ]]; then
+      echo No file provided. Using last created file \"$_LAST_CPINIT_FILE\"
+      filename=$_LAST_CPINIT_FILE
+    fi
+  fi
+
   # remove final .cpp if present
   if [[ $filename == *.cpp ]]; then
     filename=${filename::-4}
