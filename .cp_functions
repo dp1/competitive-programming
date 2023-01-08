@@ -73,6 +73,6 @@ function cpcontest()
     mkdir $1
     cd $1
   fi
-  code .
-  code ~/.cp_library.cpp
+  code . ~/.cp_library.cpp
+  cpinit a
 }
