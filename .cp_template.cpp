@@ -19,8 +19,7 @@ template<typename A, typename B> ostream& operator<<(ostream& s, const pair<A,B>
 template<typename Iterable, typename Begin = decltype(std::begin(std::declval<Iterable>())), typename NotString = typename std::enable_if<!std::is_same<Iterable, string>::value, void>::type>
 istream& operator>>(istream& s, Iterable& it) { for(auto& x : it) s >> x; return s; }
 template<typename Iterable, typename Begin = decltype(std::begin(std::declval<Iterable>())), typename NotString = typename std::enable_if<!std::is_same<Iterable, string>::value, void>::type>
-ostream& operator<<(ostream& s, const Iterable& it)
-{
+ostream& operator<<(ostream& s, const Iterable& it) {
     if(&s == &std::cerr) { s << "["; auto delim = ""; for(const auto& x : it) { s << delim << x; delim = ", "; } s << "]"; }
     else { auto delim = ""; for(const auto& x : it) { s << delim << x; delim = " "; } }
     return s;
@@ -33,14 +32,12 @@ auto micros() { return chrono::steady_clock::now().time_since_epoch() / chrono::
 
 // ====================================================== //
 
-void solve()
-{
+void solve() {
 }
 
 // ====================================================== //
 
-int main()
-{
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
@@ -49,8 +46,7 @@ int main()
     int T = 1;
     cin >> T;
 
-    for(int t = 0; t < T; t++)
-    {
+    for(int t = 0; t < T; t++) {
         //cout << "Case #" << (t+1) << ": ";
         solve();
     }
